@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sbewo</title>
+    <script>
+        // Функция для извлечения параметров из URL
+        function getUrlParams() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                user_id: params.get('user_id'),
+                username: params.get('username'),
+                full_name: params.get('full_name')
+            };
+        }
+
+        // Функция для обновления контента на странице
+        function updateGreeting() {
+            const params = getUrlParams();
+            
+            // Проверяем, если параметры переданы, то обновляем контент
+            if (params.username && params.full_name) {
+                document.getElementById('greeting').innerHTML = `<h1>Привет, ${params.username}!</h1>`;
+                document.getElementById('full_name').innerHTML = `<p>Добро пожаловать, ${params.full_name}!</p>`;
+            } else {
+                document.getElementById('greeting').innerHTML = `<h1>Привет, гость!</h1>`;
+                document.getElementById('full_name').innerHTML = `<p>Добро пожаловать на наш сайт!</p>`;
+            }
+        }
+
+        // Когда страница загружена, обновляем контент
+        window.onload = updateGreeting;
+    </script>
+</head>
+<body>
+    <div id="greeting"></div>
+    <div id="full_name"></div>
+</body>
+</html>
